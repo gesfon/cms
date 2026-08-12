@@ -4,6 +4,8 @@ import { useState, useEffect, useActionState } from 'react';
 import { getArticles, addPostAction, deleteById } from '@/app/actions/posts';
 import { logoutAction } from '@/app/actions/auth';
 
+export const dynamic = 'force-dynamic';
+
 export default function Dashboard() {
   const [articles, setArticles] = useState([]);
 
@@ -21,12 +23,13 @@ export default function Dashboard() {
 
   function deleteRow(id) {
     deleteById(id);
+    setArticles((prevArticles) => prevArticles.filter((article) => article.id !== id));
   }
   
   const [state, formAction, isPending] = useActionState(addPostAction, null);
 
     return (
-        <section className="flex items-center justify-center h-full text-gray-400 body-font">
+        <section className="flex items-center justify-center h-full text-gray-400 body-font bg-slate-900">
             <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
                 <div className="lg bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:mx-auto w-full mt-10 md:mt-0">
                     <form action={formAction}>
@@ -58,21 +61,14 @@ export default function Dashboard() {
                         <hr className="my-5" />                    
                         <div className="overflow-x-auto rounded-lg border border-gray-700">
                         <table className="min-w-full divide-y-2 divide-gray-700 bg-slate-900 text-sm">
-                            {/*
-                            <thead className="bg-slate-900 text-left font-medium text-gray-100">
-                            <tr>
-                                <th className="px-4 py-3">&#160;</th>
-                                <th className="px-4 py-3">Title</th>
-                                <th className="px-4 py-3">&#160;</th>
-                            </tr>
-                            </thead> 
-                            */}
                             <tbody className="divide-y divide-gray-700 text-gray-100">
                                 {articles && articles.map((a, index) => {
                                     return (
                                         <tr key={index}>
                                             <td className="px-4 py-3 font-medium text-gray-100">
-                                                <img className="object-cover object-center" src={a.image} alt={a.title} width={100} height={100} />
+                                                {a.image && (
+                                                    <img className="object-cover object-center" src={a.image} alt={a.title} width={100} height={100} />
+                                                )}
                                             </td>
                                             <td className="px-4 py-3 font-medium text-gray-100">{a.title}</td>
                                             <td className="px-4 py-3">
