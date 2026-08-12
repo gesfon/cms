@@ -14,3 +14,13 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+
+model Posts {
+  id        Int    @id @default(autoincrement())
+  title 	  String
+  excerpt	  String
+  content 	String
+  image 	  String
+  user 	    String
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,41 @@
+'use server';
+
+import { prisma } from '@/lib/prisma';
+
+export async function addPostAction(prevState, formData) {
+  const title = formData.get('title');
+  const excerpt = formData.get('excerpt');
+  const content = formData.get('content');
+  const image = formData.get('image');  
+
+
+  if (!title || !content) {
+    return { error: 'The article must have title and content.' };
+  }
+
+  const post = await prisma.posts.create({ 
+    data: {
+      title,
+      excerpt,
+      content,
+      image,
+      user: 'admin'
+    }
+  });
+
+  if(!post) {
+    return { error: 'Could not add article' };
+  }
+}
+
+export async function getArticles () {
+  const articles = await prisma.posts.findMany();
+  return articles;
+}
+
+export async function deleteById(id) {
+  const deletedPost= await prisma.posts.delete({
+    where:{ id: parseInt(id) }
+  })
+}
+

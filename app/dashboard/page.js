@@ -1,69 +1,81 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+import { useState, useEffect, useActionState } from 'react';
+import { getArticles, addPostAction, deleteById } from '@/app/actions/posts';
+import Link from 'next/link';
+import { logoutAction } from '@/app/actions/auth';
+
+export default function Dashboard() {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const articles = await getArticles();
+      setArticles(articles);
+    };
+    fetchArticles();
+  }, []);
+
+  function handleLogout() {
+    logoutAction();
+  }
+
+  function deleteRow(id) {
+    deleteById(id);
+  }
+  
+  const [state, formAction, isPending] = useActionState(addPostAction, null);
+
+    return (
+        <section className="my-40 flex items-center justify-center h-screen h-full text-gray-400 body-font">
+            <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+                <div className="lg bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:mx-auto w-full mt-10 md:mt-0">
+                    <form action={formAction}>
+                        {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
+                    <h2 className="text-white text-lg font-medium title-font mb-5">Add Article (<Link href="/login" onClick={handleLogout} className="text-indigo-400 hover:text-indigo-300">Logout</Link>)</h2>
+                    <div className="relative mb-4">
+                        <label htmlFor="title" className="leading-7 text-sm text-gray-400">Title</label>
+                        <input type="text" id="title" name="title" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 rounded border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    </div>
+                    <div className="relative mb-4">
+                        <label htmlFor="excerpt" className="leading-7 text-sm text-gray-400">Excerpt</label>
+                        <input type="text" id="excerpt" name="excerpt" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 rounded border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    </div>
+                    <div className="relative mb-4">
+                        <label htmlFor="content" className="leading-7 text-sm text-gray-400">Content</label>
+                        <textarea rows="10" id="content" name="content" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 rounded border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    </div>
+                    <div className="relative mb-4">
+                        <label htmlFor="image" className="leading-7 text-sm text-gray-400">Image</label>
+                        <input type="text" id="image" name="image" className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 rounded border border-gray-600 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    </div>                                        
+                    <button type="submit" disabled={isPending} className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        {isPending ? 'Creating article...' : 'Add Article'}
+                    </button>
+                    <hr className="my-5" />                    
+                    <div className="overflow-x-auto rounded-lg border border-gray-200">
+                    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                        <thead className="bg-gray-50 text-left font-medium text-gray-900">
+                        <tr>
+                            <th className="px-4 py-3">Title</th>
+                            <th className="px-4 py-3">&#160;</th>
+                        </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200 text-gray-700">
+                            {articles && articles.map((a, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td className="px-4 py-3 font-medium text-gray-900">{a.title}</td>
+                                        <td className="px-4 py-3"><button className="text-red-500 hover:text-red-700" onClick={() => deleteRow(a.id)}>Remove</button></td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    );
 }
