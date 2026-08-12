@@ -22,5 +22,6 @@ model Posts {
   content 	String
   image 	  String
   user 	    String
+  category  String
   createdAt DateTime @default(now())
 }

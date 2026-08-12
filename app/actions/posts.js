@@ -6,7 +6,8 @@ export async function addPostAction(prevState, formData) {
   const title = formData.get('title');
   const excerpt = formData.get('excerpt');
   const content = formData.get('content');
-  const image = formData.get('image');  
+  const image = formData.get('image'); 
+  const category = formData.get('category');  
 
 
   if (!title || !content) {
@@ -19,7 +20,8 @@ export async function addPostAction(prevState, formData) {
       excerpt,
       content,
       image,
-      user: 'admin'
+      user: 'admin',
+      category
     }
   });
 
