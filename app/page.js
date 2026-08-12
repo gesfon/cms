@@ -31,11 +31,11 @@ export default function Home() {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
           <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Articles</h1>
+            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Articles list</h1>
             <div className="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
           <p className="lg:w-1/2 w-full leading-relaxed text-gray-400 text-opacity-90">
-            {/* Truncate dev.db sqlite3 file to add new data. */}
+            This is a demo page with dummy data. You should truncate the dev.db sqlite3 file to add new data. If adding new tables to the database or doing ALTER TABLE run "npx prisma generate" to match the schema and for new data objects to be available. There's also a posts API available at /api/posts.
           </p>
         </div>        
         <div className="flex flex-wrap -m-4">
