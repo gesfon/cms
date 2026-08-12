@@ -30,6 +30,7 @@ export async function addPostAction(prevState, formData) {
     return { error: 'Could not add article' };
   }
   revalidatePath('/dashboard');
+  
 }
 
 export async function getArticles () {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useActionState } from 'react';
+import { useState, useEffect, useActionState, useOptimistic } from 'react';
 import { getArticles, addPostAction, deleteById } from '@/app/actions/posts';
 import { logoutAction } from '@/app/actions/auth';
 
@@ -25,8 +25,26 @@ export default function Dashboard() {
     deleteById(id);
     setArticles((prevArticles) => prevArticles.filter((article) => article.id !== id));
   }
+
+  const [optimisticArticle, addOptimisticArticle] = useOptimistic(
+    articles,
+    (currentArticles, newArticle) => [...currentArticles, newArticle]
+  );
+
+  const formSubmitHandler = async (prevState, formData) => {
+    addOptimisticArticle({ 
+      id:       Math.random(), 
+      title:    formData.get('title'),
+      excerpt:  formData.get('excerpt'),
+      content:  formData.get('content'),
+      image:    formData.get('image'),
+      category: formData.get('category'),
+    });
+
+    return addPostAction(prevState, formData);
+  };
   
-  const [state, formAction, isPending] = useActionState(addPostAction, null);
+  const [state, formAction, isPending] = useActionState(formSubmitHandler, null);
 
     return (
         <section className="flex items-center justify-center h-full text-gray-400 body-font bg-slate-900">
@@ -62,7 +80,7 @@ export default function Dashboard() {
                         <div className="overflow-x-auto rounded-lg border border-gray-700">
                         <table className="min-w-full divide-y-2 divide-gray-700 bg-slate-900 text-sm">
                             <tbody className="divide-y divide-gray-700 text-gray-100">
-                                {articles && articles.map((a, index) => {
+                                {optimisticArticle && optimisticArticle.map((a, index) => {
                                     return (
                                         <tr key={index}>
                                             <td className="px-4 py-3 font-medium text-gray-100">
