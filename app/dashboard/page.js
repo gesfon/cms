@@ -58,18 +58,18 @@ export default function Dashboard() {
                     </button>
                     <hr className="my-5" />                    
                     <div className="overflow-x-auto rounded-lg border border-gray-200">
-                    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                        <thead className="bg-gray-50 text-left font-medium text-gray-900">
+                    <table className="min-w-full divide-y-2 divide-gray-200 bg-slate-700 text-sm">
+                        <thead className="bg-slate-700 text-left font-medium text-gray-100">
                         <tr>
                             <th className="px-4 py-3">Title</th>
                             <th className="px-4 py-3">&#160;</th>
                         </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200 text-gray-700">
+                        <tbody className="divide-y divide-gray-200 text-gray-100">
                             {articles && articles.map((a, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td className="px-4 py-3 font-medium text-gray-900">{a.title}</td>
+                                        <td className="px-4 py-3 font-medium text-gray-100">{a.title}</td>
                                         <td className="px-4 py-3"><button className="text-red-500 hover:text-red-700" onClick={() => deleteRow(a.id)}>Remove</button></td>
                                     </tr>
                                 );
