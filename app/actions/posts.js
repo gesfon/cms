@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 
 export async function addPostAction(prevState, formData) {
   const title = formData.get('title');
@@ -28,6 +29,7 @@ export async function addPostAction(prevState, formData) {
   if(!post) {
     return { error: 'Could not add article' };
   }
+  revalidatePath('/dashboard');
 }
 
 export async function getArticles () {
