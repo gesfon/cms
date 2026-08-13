@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project using [Prisma](https://github.com/prisma/prisma) and SQLite as the Database. It's Tailwinded and used no Typescript.
+This is a [Next.js](https://nextjs.org) project using [Prisma](https://github.com/prisma/prisma) and SQLite as the Database. It's Tailwinded and uses no Typescript.
 
 Use `test@site.com` as username and `test` as password for a preview. 
 
