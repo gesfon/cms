@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project using [Prisma](https://github.co
 
 Use `test@site.com` as username and `test` as password for a preview. 
 
-There is API available at `/api/posts` and the pages: `/register`, `/login` and `/dashboard`. Change or delete the default `app/page.js` to build your blog or news site.
+There are APIs available at `/api/posts` and `/api/posts/[id]` and the pages `/register`, `/login` and `/dashboard`. Change or delete the default `app/page.js` to build your blog or news site.
 
 You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database.
 
