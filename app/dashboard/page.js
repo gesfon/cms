@@ -28,7 +28,7 @@ export default function Dashboard() {
   const [optimisticArticle, setOptimisticArticle] = useOptimistic(articles, (currentArticles, newArticle) => [...currentArticles, newArticle]);
   
   const handleSubmit = async (prevState, formData) => {
-    setOptimisticArticle({ 
+    setOptimisticArticle(articles, { 
       id:       Math.random(), 
       title:    formData.get('title'),
       excerpt:  formData.get('excerpt'),
@@ -80,7 +80,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="w-full lg:w-2/3 bg-slate-800 p-6 md:p-8 rounded-xl shadow-xl border border-slate-700 h-fit">
-        <h2 className="text-2xl mb-6 text-white">Manage Articles</h2>  
+        <h2 className="text-2xl mb-6 text-white">Manage Articles</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[500px]">
             <thead>
