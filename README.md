@@ -4,8 +4,6 @@ To switch databases change the provider or install other adapters. You should ru
 
 ## Getting Started
 
-To use SQLite with Prisma, initialize your project, install `prisma` and `@prisma/client`, and set your schema datasource provider to `sqlite` with a local file URL like `file:./dev`.db. Run migrations using `npx prisma migrate dev` to create your local database file.
-
 First, run the development server:
 
 ```bash
