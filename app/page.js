@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <section className="h-full h-screen text-gray-400 body-font bg-gray-900">
+    <div className="text-gray-400 body-font bg-gray-900">
       <div className="flex flex-wrap -m-4">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
@@ -54,7 +54,7 @@ export default function Home() {
           </div>
         </div>
       </div>  
-    </section>
+    </div>
   );
 }
 

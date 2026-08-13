@@ -76,7 +76,7 @@ export default function Dashboard() {
             <label className="block text-sm font-medium mb-1.5 text-slate-300">Content</label>
             <textarea name="content" rows="6" className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none" placeholder="Write your article content here..." required></textarea>
           </div>
-          <button type="submit" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Publish Article</button>
+          <button type="submit" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">{isPending ? 'Creating Article...' : 'Publish Article'}</button>
         </form>
       </div>
       <div className="w-full lg:w-2/3 bg-slate-800 p-6 md:p-8 rounded-xl shadow-xl border border-slate-700 h-fit">
