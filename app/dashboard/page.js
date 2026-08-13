@@ -4,9 +4,6 @@ import { useState, useEffect, useActionState, useOptimistic } from 'react';
 import { getArticles, addPostAction, deleteById } from '@/app/actions/posts';
 import { logoutAction } from '@/app/actions/auth';
 import Image from 'next/image';
-import Link from 'next/link';
-
-export const dynamic = 'force-dynamic';
 
 export default function Dashboard() {
   const [articles, setArticles] = useState([]);
@@ -112,7 +109,7 @@ export default function Dashboard() {
             </tbody>
           </table>
         </div>
-        {!articles.length === 0 && (
+        {articles.length === 0 && (
             <div className="text-center py-12">
                 <p className="text-slate-400">No articles found. Create one to get started!</p>
             </div> 

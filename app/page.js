@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="text-gray-400 body-font bg-gray-900">
+    <div className="h-screen h-full text-gray-400 body-font bg-gray-900">
       <div className="flex flex-wrap -m-4">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
@@ -51,9 +51,14 @@ export default function Home() {
                 </div>
               </div>
           ))}
+          {articles.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-slate-400">No articles found. Create one to get started!</p>
+            </div> 
+          )} 
+          </div>
           </div>
         </div>
-      </div>  
     </div>
   );
 }
