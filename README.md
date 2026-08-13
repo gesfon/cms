@@ -1,12 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-It uses [Prisma](https://github.com/prisma/prisma) and SQLite as the Database.
-To switch databases change the provider or install other adapters. You should run `npx prisma generate` when doing changes in the database.
+This is a [Next.js](https://nextjs.org) project using [Prisma](https://github.com/prisma/prisma) and SQLite as the Database. It's Tailwinded and used no Typescript.
 
 Use `test@site.com` as username and `test` as password for a preview. 
 
-There is also a posts API available at `/api/posts` and the pages: `/register`, `/login` and `/dashboard`. Any other page you want to delete and build on top of it, including the default `app/page.js`.
+There is API available at `/api/posts` and the pages: `/register`, `/login` and `/dashboard`. Change or delete the default `app/page.js`.
 
-You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool.
+You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database.
 
 ## Getting Started
 
