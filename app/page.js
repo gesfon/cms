@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
 
@@ -17,49 +16,31 @@ export default function Home() {
     fetchArticles();
   }, []);
 
-  const truncateText = (text, length) => {
-    if (text.length <= length) {
-      return text;
-    }
-
-    return text.substring(0, length) + '\u2026';
-  };
-
   return (
-    <div className="text-gray-400 body-font">
-      <div className="flex flex-wrap -m-4">
+    <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap w-full mb-20">
-          <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Listing Available Articles</h1>
-            <div className="h-1 w-20 bg-indigo-500 rounded"></div>
-          </div>
-          <p className="lg:w-1/2 w-full leading-relaxed text-gray-400 text-opacity-90">
-            This is a demo page with dummy data and you should delete / replace it. Truncate the dev.db sqlite3 file if adding new data. If adding new tables to the database or doing ALTER TABLEs you should change the schema.prisma file and run "npx prisma generate" to match the schema and for new data objects to be available. There is also a posts API available at "/api/posts".
-          </p>
-        </div>        
-        <div className="flex flex-wrap -m-4">
-          {articles && articles.map((article) => (
-              <div key={article.id} className="xl:w-1/4 md:w-1/2 p-4">
-                <div className="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
-                  {article.image && (
-                    <Image className="object-cover object-center mb-6" src={article.image} alt={article.title} width={300} height={160} />
-                  )}
-                  <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font">{article.category}</h3>
-                  <h2 className="text-lg text-white font-medium title-font mb-4">{truncateText(article.title, 30)}</h2>
-                  <p className="leading-relaxed text-base">{truncateText(article.excerpt, 100)}</p>
-                </div>
+        <div className="-my-8 divide-y-2 divide-gray-800">
+          {articles && articles.map((article, index) => (
+            <div key={index} className="py-8 flex flex-wrap md:flex-nowrap">
+              <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                <span className="font-semibold title-font text-white">{article.category}</span>
+                <span className="mt-1 text-gray-500 text-sm">{new Date(article.createdAt).toISOString().split('T')[0]}</span>
               </div>
+              <div className="md:flex-grow">
+                <h2 className="text-2xl font-medium text-white title-font mb-2">{article.title}</h2>
+                <p className="leading-relaxed">{article.excerpt}</p>
+                <a className="text-indigo-400 inline-flex items-center mt-4">Learn More
+                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
           ))}
-          {articles.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-slate-400">No articles found. Create one to get started!</p>
-            </div> 
-          )} 
-          </div>
-          </div>
         </div>
-    </div>
+      </div>
+    </section>
   );
 }
 
