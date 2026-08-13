@@ -25,10 +25,10 @@ export default function Dashboard() {
     setArticles((prevArticles) => prevArticles.filter((article) => article.id !== id));
   }
 
-  const [optimisticArticle, addOptimisticArticle] = useOptimistic(articles, (currentArticles, newArticle) => [...currentArticles, newArticle]);
+  const [optimisticArticle, setOptimisticArticle] = useOptimistic(articles, (currentArticles, newArticle) => [...currentArticles, newArticle]);
   
-  const formSubmitHandler = async (prevState, formData) => {
-    addOptimisticArticle({ 
+  const handleSubmit = async (prevState, formData) => {
+    setOptimisticArticle({ 
       id:       Math.random(), 
       title:    formData.get('title'),
       excerpt:  formData.get('excerpt'),
@@ -40,12 +40,12 @@ export default function Dashboard() {
     return addPostAction(prevState, formData);
   };
   
-  const [state, formAction, isPending] = useActionState(formSubmitHandler, null);
+  const [state, formAction, isPending] = useActionState(handleSubmit, null);
 
   return (
     <div className="min-h-screen bg-slate-900 p-4 md:p-8 flex flex-col lg:flex-row gap-8 text-slate-200 font-sans">
       <div className="w-full lg:w-1/3 bg-slate-800 p-6 md:p-8 rounded-xl shadow-xl h-fit border border-slate-700">
-        <h2 className="text-2xl font-bold mb-6 text-white">Create Article (<a href="#" onClick={handleLogout} className="text-indigo-400 hover:text-indigo-300">Logout</a>)</h2>   
+        <h2 className="text-2xl mb-6 text-white">Create Article</h2>   
         <form action={formAction} className="flex flex-col gap-4">
           {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
           <div>
@@ -75,9 +75,12 @@ export default function Dashboard() {
           </div>
           <button type="submit" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">{isPending ? 'Creating Article...' : 'Publish Article'}</button>
         </form>
+        <div className="flex items-center justify-center mt-4 text-sm">
+            <a href="#" onClick={handleLogout} className="text-indigo-400 hover:text-indigo-300">Logout</a>
+        </div>
       </div>
       <div className="w-full lg:w-2/3 bg-slate-800 p-6 md:p-8 rounded-xl shadow-xl border border-slate-700 h-fit">
-        <h2 className="text-2xl font-bold mb-6 text-white">Manage Articles</h2>  
+        <h2 className="text-2xl mb-6 text-white">Manage Articles</h2>  
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[500px]">
             <thead>

@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen h-full text-gray-400 body-font bg-gray-900">
+    <div className="text-gray-400 body-font">
       <div className="flex flex-wrap -m-4">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
