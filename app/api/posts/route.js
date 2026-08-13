@@ -7,7 +7,7 @@ const posts = await prisma.posts.findMany(
       createdAt: 'desc'
     }
   }
-);
+) || {};
 
 export async function GET() {
   return NextResponse.json(posts);
