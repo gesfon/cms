@@ -1,8 +1,7 @@
 'use client';
 
-// import Image from "next/image";
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
 
@@ -27,7 +26,6 @@ export default function Home() {
   };
 
   return (
-    <>
     <section className="h-full h-screen text-gray-400 body-font bg-gray-900">
       <div className="flex flex-wrap -m-4">
       <div className="container px-5 py-24 mx-auto">
@@ -45,7 +43,7 @@ export default function Home() {
               <div key={article.id} className="xl:w-1/4 md:w-1/2 p-4">
                 <div className="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
                   {article.image && (
-                    <img className="object-cover object-center mb-6" src={article.image} alt={article.title} width={300} height={160} />
+                    <Image className="object-cover object-center mb-6" src={article.image} alt={article.title} width={300} height={160} />
                   )}
                   <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font">{article.category}</h3>
                   <h2 className="text-lg text-white font-medium title-font mb-4">{truncateText(article.title, 30)}</h2>
@@ -57,14 +55,6 @@ export default function Home() {
         </div>
       </div>  
     </section>
-    <footer className="text-gray-400 bg-gray-900 body-font">
-      <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <p className="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:py-2 sm:mt-0 mt-4">© 2026 <a href="https://designr.se" className="text-gray-500 ml-1" target="_blank" rel="noopener noreferrer">Designr.se</a> —
-          <Link href="/login" className="ml-2 text-indigo-400 hover:text-indigo-300">Login here</Link>
-        </p>
-      </div>
-    </footer>
-  </>
   );
 }
 
