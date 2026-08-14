@@ -4,14 +4,14 @@ Use `test@site.com` as username and `test` as password for a preview.
 
 There are APIs available at `/api/posts` and `/api/posts/[id]` and the pages `/register`, `/login` and `/dashboard`. Change or delete the default `app/page.js` to build your blog or news site.
 
-You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database.
-
 Make sure you have an `.env` file with the following:
 ```
 DATABASE_URL="file:./dev.db"
-AUTH_SECRET=a_long_32_chars_string
+AUTH_SECRET=a_32_chars_long_string
 ```
 Run `npx auth secret` to generate a new secret.
+
+You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database.
 
 ## Getting Started
 
