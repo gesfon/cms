@@ -11,7 +11,7 @@ AUTH_SECRET=a_32_chars_long_string
 ```
 Run `npx auth secret` to generate a new secret.
 
-You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database.
+You can query the `dev.db` file and perform other operations directly with the `sqlite3` command line tool. Run `npx prisma generate` when doing changes in the database. Better yet, run this line after `npm i`.
 
 ## Getting Started
 
