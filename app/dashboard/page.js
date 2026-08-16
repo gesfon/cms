@@ -24,20 +24,17 @@ export default function Dashboard() {
     deleteById(id);
     setArticles((prevArticles) => prevArticles.filter((article) => article.id !== id));
   }
-
-  const [optimisticArticle, setOptimisticArticle] = useOptimistic(articles, (currentArticles, newArticle) => [...currentArticles, newArticle]);
   
   const handleSubmit = async (prevState, formData) => {
-    setOptimisticArticle(articles, { 
+    addPostAction(prevState, formData);
+    setArticles([...articles, { 
       id:       Math.random(), 
       title:    formData.get('title'),
       excerpt:  formData.get('excerpt'),
       content:  formData.get('content'),
       image:    formData.get('image'),
       category: formData.get('category'),
-    });
-
-    return addPostAction(prevState, formData);
+    }]);
   };
   
   const [state, formAction, isPending] = useActionState(handleSubmit, null);
@@ -91,7 +88,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-700/50">
-             {optimisticArticle && optimisticArticle.map((a, index) => {
+             {articles && articles.map((a, index) => {
                 return (
                     <tr key={index} className="hover:bg-slate-700/30 transition-colors group">
                         <td className="py-4 px-2 w-20">
