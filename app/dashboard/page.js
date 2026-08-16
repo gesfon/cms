@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useActionState, useOptimistic } from 'react';
+import { useState, useEffect, useActionState } from 'react';
 import { getArticles, addPostAction, deleteById } from '@/app/actions/posts';
 import { logoutAction } from '@/app/actions/auth';
 import Image from 'next/image';
